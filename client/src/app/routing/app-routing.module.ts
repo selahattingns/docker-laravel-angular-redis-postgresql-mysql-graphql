@@ -11,10 +11,10 @@ const pages: Routes = [
 
 const routes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
-    { path: '**', redirectTo: '/login' },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
-    { path: 'pages', children: pages, canActivate: [AuthGuard]}
+    { path: 'pages', children: pages, canActivate: [AuthGuard]},
+    { path: '**', redirectTo: '/login' },
 
 ];
 

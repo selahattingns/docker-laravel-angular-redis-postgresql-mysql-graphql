@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthGuard } from "../guards/auth.guard";
 import { HttpClientModule, HTTP_INTERCEPTORS  } from '@angular/common/http';
 import { AuthInterceptor } from '../interceptors/auth-interceptor';
+import {SharedModule} from "./shared.module";
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { AuthInterceptor } from '../interceptors/auth-interceptor';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    SharedModule
   ],
   providers: [
       AuthGuard,

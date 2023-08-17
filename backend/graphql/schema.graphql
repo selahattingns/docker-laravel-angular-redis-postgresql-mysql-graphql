@@ -1,0 +1,35 @@
+"A datetime string with format `Y-m-d H:i:s`, e.g. `2018-05-23 13:43:32`."
+scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+
+"Indicates what fields are available at the top level of a query operation."
+type Query {
+    posts(user_id: Int @eq): [Post!]! @all
+    post(id: Int @eq): Post @find
+    comments(user_id: Int @eq, post_id: Int @eq): [Comment!]! @all
+    tags: [Tag!]! @all
+    tag(id: Int @eq): Tag @find
+}
+
+type Post {
+    id: ID!
+    user_id: Int!
+    title: String!
+    content: String!
+    published_at: DateTime!
+    comments: [Comment!]! @hasMany
+    tags: [Tag!]! @belongsToMany
+}
+
+type Comment {
+    id: ID!
+    user_id: Int!
+    post_id: Int!
+    content: String!
+    post: Post @belongsTo
+}
+
+type Tag {
+    id: ID!
+    name: String!
+    posts: [Post!]! @belongsToMany
+}

@@ -1,5 +1,23 @@
 <div class="container">
-
+    <div class="card m-5 bg-secondary">
+        <div class="card-header" style="color:white">Search (Press enter after searching)</div>
+        <div class="card-body" style="color:white">
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="">Title</label>
+                        <input type="text" class="form-control" (keydown.enter)="getPostList()" [(ngModel)]="filterTitle">
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="">Content</label>
+                        <input type="text" class="form-control" (keydown.enter)="getPostList()" [(ngModel)]="filterContent">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="card m-5" *ngFor="let post of posts">
         <div class="card-header text-center">
             <div *ngIf="post.is_my_post">

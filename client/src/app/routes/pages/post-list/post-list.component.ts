@@ -9,24 +9,24 @@ import {PostListService} from "./post-list.service";
 })
 export class PostListComponent {
   isMyPost = false;
+  filterTitle = "";
+  filterContent = "";
   posts: any = [];
 
   constructor(private route: ActivatedRoute, private postListService: PostListService) {}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      this.getPostList(this.isMyPost = params['filter'] == 'me');
+      this.isMyPost = params['filter'] == 'me';
+      this.getPostList();
     });
   }
 
   /**
    *
-   * @param isMyPost
-   * @param filterTitle
-   * @param filterContent
    */
-  getPostList(isMyPost: boolean, filterTitle: string = "", filterContent: string = ""){
-    this.postListService.getPostList(isMyPost, filterTitle, filterContent).subscribe(
+  getPostList(){
+    this.postListService.getPostList(this.isMyPost, this.filterTitle, this.filterContent).subscribe(
         (response) => {
           this.posts = response;
         }

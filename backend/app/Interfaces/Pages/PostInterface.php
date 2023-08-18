@@ -34,4 +34,10 @@ interface PostInterface {
      * @return int
      */
     public function updatePost($userId, $postId, $title, $content);
+
+    /**
+     * @param $id
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|mixed|object|null
+     */
+    public function firstWithId($id);
 }

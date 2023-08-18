@@ -60,4 +60,13 @@ class PostService {
     {
         return $this->postRepository->updatePost(Auth::id(), $postId, $title, $content);
     }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|mixed|object|null
+     */
+    public function firstWithId($id)
+    {
+        return $this->postRepository->firstWithId($id);
+    }
 }

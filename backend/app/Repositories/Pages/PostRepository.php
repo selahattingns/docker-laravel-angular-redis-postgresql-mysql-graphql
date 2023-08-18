@@ -88,4 +88,12 @@ class PostRepository implements PostInterface {
             "content" => $content,
         ]);
     }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|mixed|object|null
+     */
+    public function firstWithId($id){
+        return $this->model->query()->where('id', $id)->first();
+    }
 }

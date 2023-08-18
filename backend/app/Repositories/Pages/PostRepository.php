@@ -41,6 +41,7 @@ class PostRepository implements PostInterface {
                     $query->where('content', 'like', '%' . $content . '%');
                 })
             ->with('user')
+            ->withCount('comments')
             ->orderBy('published_at', 'desc')->get()->map(function ($row) {
                 $row->is_my_post = $row->user_id === Auth::id();
                 return $row;

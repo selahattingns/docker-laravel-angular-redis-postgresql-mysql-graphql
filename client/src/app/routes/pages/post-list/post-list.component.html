@@ -70,5 +70,8 @@
                 <b>{{ post.user.firstname }} {{ post.user.lastname }}</b>: {{ post.content }}
             </div>
         </div>
+        <div class="card-footer text-center">
+            <button class="btn btn-warning" (click)="goToComment(post.id)">Comments ({{post.comments_count}})</button>
+        </div>
     </div>
 </div>

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {PostService} from "./post.service";
 import {ToastrService} from "ngx-toastr";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-post-list',
@@ -16,7 +17,7 @@ export class PostListComponent {
   filterContent = "";
   posts: any = [];
 
-  constructor(private route: ActivatedRoute, private postService: PostService, private toastr: ToastrService) {}
+  constructor(private route: ActivatedRoute, private postService: PostService, private router:Router, private toastr: ToastrService) {}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -73,5 +74,13 @@ export class PostListComponent {
               this.toastr.success('success', 'post updated.');
           }
       );
+  }
+
+    /**
+     *
+     * @param postId
+     */
+  goToComment(postId: number){
+      this.router.navigate(['pages/comment-list/' + postId]);
   }
 }

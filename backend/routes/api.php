@@ -28,4 +28,11 @@ Route::group(['prefix' => 'pages', 'middleware' => 'check.jwt'], function (){
         Route::delete('/{id}', [\App\Http\Controllers\Pages\PostController::class, 'deletePost']);
         Route::patch('/', [\App\Http\Controllers\Pages\PostController::class, 'updatePost']);
     });
+
+    Route::group(['prefix' => "comments"], function (){
+        Route::get('/', [\App\Http\Controllers\Pages\CommentController::class, 'getCommentList']);
+        Route::post('/', [\App\Http\Controllers\Pages\CommentController::class, 'storeComment']);
+        Route::delete('/{id}', [\App\Http\Controllers\Pages\CommentController::class, 'deleteComment']);
+        Route::patch('/', [\App\Http\Controllers\Pages\CommentController::class, 'updateComment']);
+    });
 });

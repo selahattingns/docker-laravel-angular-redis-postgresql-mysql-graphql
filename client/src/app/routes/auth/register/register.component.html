@@ -1,1 +1,40 @@
-<p>register works!</p>
+<br><br><br>
+<div class="container">
+    <main class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">Register</div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="">First Name</label>
+                        <input type="text" class="form-control" [(ngModel)]="firstname">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Last Name</label>
+                        <input type="text" class="form-control" [(ngModel)]="lastname">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Email</label>
+                        <input type="text" class="form-control" [(ngModel)]="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Password</label>
+                        <input type="text" class="form-control" [(ngModel)]="password">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Password Confrmation</label>
+                        <input type="text" class="form-control" [(ngModel)]="password_confirmation">
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col text-center">
+                            <button class="btn btn-success" (click)="register()">Register</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4"></div>
+    </main>
+</div>

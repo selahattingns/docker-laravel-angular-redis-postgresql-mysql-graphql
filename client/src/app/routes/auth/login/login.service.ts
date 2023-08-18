@@ -20,6 +20,6 @@ export class LoginService {
      * @param password
      */
     loginUser(email: string, password: string): Observable<any> {
-        return this.http.post(`${API_URL}/login`, { email, password });
+        return this.http.post(`${API_URL}/login`, { email: email, password: password });
     }
 }

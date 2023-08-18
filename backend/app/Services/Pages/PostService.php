@@ -49,4 +49,15 @@ class PostService {
     {
         return $this->postRepository->deletePost($userId, $postId);
     }
+
+    /**
+     * @param $postId
+     * @param $title
+     * @param $content
+     * @return mixed
+     */
+    public function updatePost($postId, $title, $content)
+    {
+        return $this->postRepository->updatePost(Auth::id(), $postId, $title, $content);
+    }
 }

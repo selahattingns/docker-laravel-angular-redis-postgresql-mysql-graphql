@@ -40,6 +40,7 @@ class PostRepository implements PostInterface {
                 ->when($content, function ($query) use ($content){
                     $query->where('content', 'like', '%' . $content . '%');
                 })
+            ->with('user')
             ->orderBy('published_at', 'desc')->get()->map(function ($row) {
                 $row->is_my_post = $row->user_id === Auth::id();
                 return $row;
@@ -70,5 +71,20 @@ class PostRepository implements PostInterface {
     public function deletePost($userId, $postId)
     {
         return $this->model->query()->where('user_id', $userId)->where('id', $postId)->delete();
+    }
+
+    /**
+     * @param $userId
+     * @param $postId
+     * @param $title
+     * @param $content
+     * @return int
+     */
+    public function updatePost($userId, $postId, $title, $content)
+    {
+        return $this->model->query()->where('user_id', $userId)->where('id', $postId)->update([
+            "title" => $title,
+            "content" => $content,
+        ]);
     }
 }

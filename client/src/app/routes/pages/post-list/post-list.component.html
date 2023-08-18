@@ -52,7 +52,7 @@
                 </div>
             </div>
             <div *ngIf="!post.is_my_post">
-                {{ post.title }} ({{ post.published_at }})
+                {{ post.title }} <br>({{ post.published_at }})
             </div>
         </div>
         <div class="card-body text-center">
@@ -67,7 +67,7 @@
                 </div>
             </div>
             <div *ngIf="!post.is_my_post">
-                {{ post.content }}
+                <b>{{ post.user.firstname }} {{ post.user.lastname }}</b>: {{ post.content }}
             </div>
         </div>
     </div>

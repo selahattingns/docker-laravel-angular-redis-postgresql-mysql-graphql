@@ -45,4 +45,14 @@ export class PostService {
     deletePost(id: number){
         return this.http.delete(`${API_URL}/pages/posts/` + id);
     }
+
+    /**
+     *
+     * @param postId
+     * @param title
+     * @param content
+     */
+    updatePost(postId: number, title: string, content: string){
+        return this.http.patch(`${API_URL}/pages/posts`, {post_id: postId, title: title, content: content});
+    }
 }

@@ -68,6 +68,10 @@ export class PostListComponent {
    * @param post
    */
   updatePost(post: any){
-    console.log(post, "save");
+      this.postService.updatePost(post.id, post.title, post.content).subscribe(
+          (response) => {
+              this.toastr.success('success', 'post updated.');
+          }
+      );
   }
 }

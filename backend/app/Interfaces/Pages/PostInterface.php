@@ -25,4 +25,13 @@ interface PostInterface {
      * @return mixed
      */
     public function deletePost($userId, $postId);
+
+    /**
+     * @param $userId
+     * @param $postId
+     * @param $title
+     * @param $content
+     * @return int
+     */
+    public function updatePost($userId, $postId, $title, $content);
 }

@@ -1,18 +1,38 @@
 <div class="container">
+    <div class="card m-5">
+        <div class="card-header text-center">
+            New Title
+        </div>
+        <div class="card-body text-center">
+            <div class="row m-2">
+                <div class="col-11">
+                    <input type="text" placeholder="Title" class="form-control" [(ngModel)]="newTitle">
+                </div>
+            </div>
+            <div class="row m-2">
+                <div class="col-11">
+                    <textarea placeholder="Content" class="form-control" [(ngModel)]="newContent"></textarea>
+                </div>
+                <div class="col-1">
+                    <button (click)="storePost()" class="btn btn-primary">Store</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="card m-5 bg-secondary">
-        <div class="card-header" style="color:white">Search (Press enter after searching)</div>
+        <div class="card-header" style="color:white">Search</div>
         <div class="card-body" style="color:white">
             <div class="row">
                 <div class="col">
                     <div class="form-group">
                         <label for="">Title</label>
-                        <input type="text" class="form-control" (keydown.enter)="getPostList()" [(ngModel)]="filterTitle">
+                        <input type="text" class="form-control" placeholder="Press enter after searching" (keydown.enter)="getPostList()" [(ngModel)]="filterTitle">
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-group">
                         <label for="">Content</label>
-                        <input type="text" class="form-control" (keydown.enter)="getPostList()" [(ngModel)]="filterContent">
+                        <input type="text" class="form-control" placeholder="Press enter after searching" (keydown.enter)="getPostList()" [(ngModel)]="filterContent">
                     </div>
                 </div>
             </div>
@@ -23,15 +43,16 @@
             <div *ngIf="post.is_my_post">
                 <div class="row">
                     <div class="col-11">
+                        {{ post.published_at }}
                         <input type="text" class="form-control" [(ngModel)]="post.title">
                     </div>
                     <div class="col-1">
-                        <a class="close btn btn-danger" href="#">X</a>
+                        <button (click)="deletePost(post)" class="btn btn-danger">X</button>
                     </div>
                 </div>
             </div>
             <div *ngIf="!post.is_my_post">
-                {{ post.title }}
+                {{ post.title }} ({{ post.published_at }})
             </div>
         </div>
         <div class="card-body text-center">
@@ -41,7 +62,7 @@
                         <textarea class="form-control" [(ngModel)]="post.content"></textarea>
                     </div>
                     <div class="col-1">
-                        <button class="btn btn-success">Save</button>
+                        <button (click)="updatePost(post)" class="btn btn-success">Update</button>
                     </div>
                 </div>
             </div>

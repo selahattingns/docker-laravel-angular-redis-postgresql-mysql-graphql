@@ -9,6 +9,8 @@ import {PostListService} from "./post-list.service";
 })
 export class PostListComponent {
   isMyPost = false;
+  newTitle = "";
+  newContent = "";
   filterTitle = "";
   filterContent = "";
   posts: any = [];
@@ -31,5 +33,28 @@ export class PostListComponent {
           this.posts = response;
         }
     );
+  }
+
+  /**
+   *
+   * @param post
+   */
+  deletePost(post: any){
+    console.log(post, "delete");
+  }
+
+  /**
+   *
+   */
+  storePost(){
+    console.log(this.newTitle, this.newContent);
+  }
+
+  /**
+   *
+   * @param post
+   */
+  updatePost(post: any){
+    console.log(post, "save");
   }
 }

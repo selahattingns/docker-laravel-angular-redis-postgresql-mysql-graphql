@@ -39,7 +39,7 @@ class PostRepository implements PostInterface {
                 ->when($content, function ($query) use ($content){
                     $query->where('content', 'like', '%' . $content . '%');
                 })
-            ->get()->map(function ($row) {
+            ->orderBy('published_at', 'desc')->get()->map(function ($row) {
                 $row->is_my_post = $row->user_id === Auth::id();
                 return $row;
             });

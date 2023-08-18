@@ -41,7 +41,12 @@ export class PostListComponent {
    * @param post
    */
   deletePost(post: any){
-    console.log(post, "delete");
+    this.postService.deletePost(post.id).subscribe(
+        (response) => {
+          this.toastr.success('success', 'post deleted.');
+          this.getPostList();
+        }
+    );
   }
 
   /**

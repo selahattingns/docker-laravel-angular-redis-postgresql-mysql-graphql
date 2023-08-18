@@ -61,4 +61,14 @@ class PostRepository implements PostInterface {
             "published_at" => Carbon::now(),
         ]);
     }
+
+    /**
+     * @param $userId
+     * @param $postId
+     * @return mixed
+     */
+    public function deletePost($userId, $postId)
+    {
+        return $this->model->query()->where('user_id', $userId)->where('id', $postId)->delete();
+    }
 }

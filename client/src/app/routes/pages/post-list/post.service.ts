@@ -37,4 +37,12 @@ export class PostService {
     storePost(newTitle: string, newContent:string){
         return this.http.post(`${API_URL}/pages/posts`, {title: newTitle, content: newContent});
     }
+
+    /**
+     *
+     * @param id
+     */
+    deletePost(id: number){
+        return this.http.delete(`${API_URL}/pages/posts/` + id);
+    }
 }

@@ -25,6 +25,7 @@ Route::group(['prefix' => 'pages', 'middleware' => 'check.jwt'], function (){
     Route::group(['prefix' => "posts"], function (){
         Route::get('/', [\App\Http\Controllers\Pages\PostController::class, 'getPostList']);
         Route::post('/', [\App\Http\Controllers\Pages\PostController::class, 'storePost']);
+        Route::delete('/{id}', [\App\Http\Controllers\Pages\PostController::class, 'deletePost']);
 
     });
 });

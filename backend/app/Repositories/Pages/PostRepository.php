@@ -2,6 +2,7 @@
 namespace App\Repositories\Pages;
 
 use App\Models\Post;
+use App\Models\PostTag;
 use App\Interfaces\Pages\PostInterface;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -26,9 +27,11 @@ class PostRepository implements PostInterface {
      * @param bool $isMyPost
      * @param string $title
      * @param string $content
+     * @param string $tag
+     * @param null $otherQuery
      * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|mixed[]
      */
-    public function getPostList($isMyPost = false, $title = null, $content = null)
+    public function getPostList($isMyPost = false, $title = null, $content = null, $tag = null, $otherQuery = null)
     {
         return $this->model->query()
                 ->when($isMyPost, function ($query){
@@ -40,12 +43,19 @@ class PostRepository implements PostInterface {
                 ->when($content, function ($query) use ($content){
                     $query->where('content', 'like', '%' . $content . '%');
                 })
-            ->with('user')
-            ->withCount('comments')
-            ->orderBy('published_at', 'desc')->get()->map(function ($row) {
-                $row->is_my_post = $row->user_id === Auth::id();
-                return $row;
-            });
+                ->when($tag, function ($query) use ($tag){
+                    $query->whereHas('tags', function ($query) use ($tag){
+                        $query->where('name', 'like', '%' . $tag . '%');
+                    });
+                })
+                ->when($otherQuery, $otherQuery)
+                ->with('user')
+                ->with('tags')
+                ->withCount('comments')
+                ->orderBy('published_at', 'desc')->get()->map(function ($row) {
+                    $row->is_my_post = $row->user_id === Auth::id();
+                    return $row;
+                });
     }
 
     /**
@@ -95,5 +105,18 @@ class PostRepository implements PostInterface {
      */
     public function firstWithId($id){
         return $this->model->query()->where('id', $id)->first();
+    }
+
+    /**
+     * @param $postId
+     * @param $tagId
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model
+     */
+    public function firstOrCreateForPostTag($postId, $tagId)
+    {
+        return PostTag::query()->firstOrCreate([
+            "post_id" => $postId,
+            "tag_id" => $tagId,
+        ]);
     }
 }

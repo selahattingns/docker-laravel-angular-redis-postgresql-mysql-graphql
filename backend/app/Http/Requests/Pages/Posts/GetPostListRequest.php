@@ -19,7 +19,8 @@ class GetPostListRequest extends FormRequest
         return [
             'is_my_post' => 'required|string',
             'title' => 'nullable|string',
-            'content' => 'nullable|string'
+            'content' => 'nullable|string',
+            'tag' => 'nullable|string'
         ];
     }
 

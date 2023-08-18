@@ -7,7 +7,7 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Console\Command;
 
-class createFactoryData extends Command
+class CreateFactoryData extends Command
 {
     /**
      * The name and signature of the console command.

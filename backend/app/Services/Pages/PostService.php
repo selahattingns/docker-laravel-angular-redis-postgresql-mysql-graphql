@@ -23,21 +23,27 @@ class PostService {
      * @param bool $isMyPost
      * @param null $title
      * @param null $content
+     * @param null $tag
+     * @param null $otherQuery
      * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|mixed[]
      */
-    public function getPostList($isMyPost = false, $title = null, $content = null)
+    public function getPostList($isMyPost = false, $title = null, $content = null, $tag = null, $otherQuery = null)
     {
-        return $this->postRepository->getPostList($isMyPost, $title, $content);
+        return $this->postRepository->getPostList($isMyPost, $title, $content, $tag, $otherQuery);
     }
 
     /**
      * @param $title
      * @param $content
-     * @return mixed
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function storePost($title, $content)
     {
-        return $this->postRepository->storePostToUser(Auth::id(), $title, $content);
+        $post = $this->postRepository->storePostToUser(Auth::id(), $title, $content);
+        $this->bindTagToPost($post->id, $content);
+
+        return $post;
     }
 
     /**
@@ -68,5 +74,20 @@ class PostService {
     public function firstWithId($id)
     {
         return $this->postRepository->firstWithId($id);
+    }
+
+    /**
+     * @param $postId
+     * @param $content
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     */
+    public function bindTagToPost($postId, $content)
+    {
+        preg_match_all('/#(\w+)/', $content, $findTags);
+
+        foreach ($findTags[1] as $findTag){
+            $tag = app()->make(TagService::class)->firstOrCreate($findTag);
+            $this->postRepository->firstOrCreateForPostTag($postId, $tag->id);
+        }
     }
 }

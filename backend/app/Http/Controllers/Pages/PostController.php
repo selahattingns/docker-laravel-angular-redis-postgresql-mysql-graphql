@@ -31,12 +31,13 @@ class PostController extends Controller
      */
     public function getPostList(GetPostListRequest $request)
     {
-        return $this->postService->getPostList(boolval($request->is_my_post === "true"), $request->title, $request->get('content'));
+        return $this->postService->getPostList(boolval($request->is_my_post === "true"), $request->title, $request->get('content'), $request->tag);
     }
 
     /**
      * @param StorePostRequest $request
-     * @return mixed
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function storePost(StorePostRequest $request)
     {

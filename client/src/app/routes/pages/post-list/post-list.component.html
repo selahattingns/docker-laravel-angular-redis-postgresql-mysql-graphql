@@ -35,6 +35,12 @@
                         <input type="text" class="form-control" placeholder="Press enter after searching" (keydown.enter)="getPostList()" [(ngModel)]="filterContent">
                     </div>
                 </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="">Tag</label>
+                        <input type="text" class="form-control" placeholder="Press enter after searching" (keydown.enter)="getPostList()" [(ngModel)]="filterTag">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -71,7 +77,16 @@
             </div>
         </div>
         <div class="card-footer text-center">
-            <button class="btn btn-warning" (click)="goToComment(post.id)">Comments ({{post.comments_count}})</button>
+            <div class="row">
+                <div class="col">
+                    <button class="btn btn-warning" (click)="goToComment(post.id)">Comments ({{post.comments_count}})</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <a class="btn-primary m-2" style="cursor: pointer" (click)="selectTag(tag.name)" *ngFor="let tag of post.tags">{{ tag.name }}</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>

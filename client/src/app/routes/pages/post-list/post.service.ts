@@ -19,12 +19,14 @@ export class PostService {
      * @param isMyPost
      * @param filterTitle
      * @param filterContent
+     * @param filterTag
      */
-    getPostList(isMyPost: boolean, filterTitle: string = "", filterContent: string = ""): Observable<any> {
+    getPostList(isMyPost: boolean, filterTitle: string = "", filterContent: string = "", filterTag: string = ""): Observable<any> {
         let params = new HttpParams();
         params = params.append('is_my_post', isMyPost);
         params = params.append('title', filterTitle);
         params = params.append('content', filterContent);
+        params = params.append('tag', filterTag);
 
         return this.http.get(`${API_URL}/pages/posts`, {params: params});
     }

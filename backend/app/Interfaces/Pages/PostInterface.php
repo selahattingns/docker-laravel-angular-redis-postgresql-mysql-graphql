@@ -7,9 +7,11 @@ interface PostInterface {
      * @param bool $isMyPost
      * @param string $title
      * @param string $content
+     * @param string $tag
+     * @param null $otherQuery
      * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|mixed[]
      */
-    public function getPostList($isMyPost = false, $title = null, $content = null);
+    public function getPostList($isMyPost = false, $title = null, $content = null, $tag = null, $otherQuery = null);
 
     /**
      * @param $userId
@@ -40,4 +42,11 @@ interface PostInterface {
      * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|mixed|object|null
      */
     public function firstWithId($id);
+
+    /**
+     * @param $postId
+     * @param $tagId
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model
+     */
+    public function firstOrCreateForPostTag($postId, $tagId);
 }

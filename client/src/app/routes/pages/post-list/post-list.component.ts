@@ -15,6 +15,7 @@ export class PostListComponent {
   newContent = "";
   filterTitle = "";
   filterContent = "";
+  filterTag = "";
   posts: any = [];
 
   constructor(private route: ActivatedRoute, private postService: PostService, private router:Router, private toastr: ToastrService) {}
@@ -30,7 +31,7 @@ export class PostListComponent {
    *
    */
   getPostList(){
-    this.postService.getPostList(this.isMyPost, this.filterTitle, this.filterContent).subscribe(
+    this.postService.getPostList(this.isMyPost, this.filterTitle, this.filterContent, this.filterTag).subscribe(
         (response) => {
                this.posts = response;
              }
@@ -82,5 +83,14 @@ export class PostListComponent {
      */
   goToComment(postId: number){
       this.router.navigate(['pages/comment-list/' + postId]);
+  }
+
+    /**
+     *
+     * @param tagName
+     */
+  selectTag(tagName: string){
+      this.filterTag = tagName;
+      this.getPostList();
   }
 }

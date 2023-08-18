@@ -48,12 +48,9 @@
         <div class="card-header text-center">
             <div *ngIf="post.is_my_post">
                 <div class="row">
-                    <div class="col-11">
+                    <div class="col-12">
                         {{ post.published_at }}
                         <input type="text" class="form-control" [(ngModel)]="post.title">
-                    </div>
-                    <div class="col-1">
-                        <button (click)="deletePost(post)" class="btn btn-danger">X</button>
                     </div>
                 </div>
             </div>
@@ -68,6 +65,7 @@
                         <textarea class="form-control" [(ngModel)]="post.content"></textarea>
                     </div>
                     <div class="col-1">
+                        <button (click)="deletePost(post)" class="btn btn-danger m-2">X</button>
                         <button (click)="updatePost(post)" class="btn btn-success">Update</button>
                     </div>
                 </div>

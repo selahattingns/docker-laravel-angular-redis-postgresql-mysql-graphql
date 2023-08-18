@@ -13,6 +13,7 @@ export class CommentListComponent {
   newContent = "";
   filterContent = "";
   comments: any = [];
+  post: any = {};
   postId: string = "";
 
   constructor(private route: ActivatedRoute, private commentService: CommentService, private router:Router, private toastr: ToastrService) {}
@@ -30,7 +31,8 @@ export class CommentListComponent {
   getCommentList(){
     this.commentService.getCommentList(this.postId, this.filterContent).subscribe(
         (response) => {
-          this.comments = response;
+            this.post = response.post;
+            this.comments = response.comments;
         }
     );
   }

@@ -4,17 +4,12 @@
             <button class="btn btn-light" (click)="goToBack()">Geri</button>
         </div>
     </div>
-    <div class="card m-5">
-        <div class="card-header text-center">
-            New Comment
-        </div>
-        <div class="card-body text-center">
-            <div class="row m-2">
-                <div class="col-11">
-                    <textarea placeholder="Content" class="form-control" [(ngModel)]="newContent"></textarea>
-                </div>
-                <div class="col-1">
-                    <button (click)="storeComment()" class="btn btn-primary">Store</button>
+    <div class="card m-5 bg-body-secondary text-center">
+        <div class="card-header">{{ post.title }}</div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col">
+                    {{ post.content }}
                 </div>
             </div>
         </div>
@@ -36,11 +31,8 @@
         <div class="card-header text-center">
             <div *ngIf="comment.is_my_comment">
                 <div class="row">
-                    <div class="col-11">
+                    <div class="col-12">
                         {{ comment.formatted_created_at }}
-                    </div>
-                    <div class="col-1">
-                        <button (click)="deleteComment(comment)" class="btn btn-danger">X</button>
                     </div>
                 </div>
             </div>
@@ -55,12 +47,28 @@
                         <textarea class="form-control" [(ngModel)]="comment.content"></textarea>
                     </div>
                     <div class="col-1">
+                        <button (click)="deleteComment(comment)" class="btn btn-danger m-2">X</button>
                         <button (click)="updateComment(comment)" class="btn btn-success">Update</button>
                     </div>
                 </div>
             </div>
             <div *ngIf="!comment.is_my_comment">
                 <b>{{ comment.user.firstname }} {{ comment.user.lastname }}</b>: {{ comment.content }}
+            </div>
+        </div>
+    </div>
+    <div class="card m-5">
+        <div class="card-header text-center">
+            New Comment
+        </div>
+        <div class="card-body text-center">
+            <div class="row m-2">
+                <div class="col-11">
+                    <textarea placeholder="Content" class="form-control" [(ngModel)]="newContent"></textarea>
+                </div>
+                <div class="col-1">
+                    <button (click)="storeComment()" class="btn btn-primary">Store</button>
+                </div>
             </div>
         </div>
     </div>

@@ -7,6 +7,7 @@ use App\Http\Requests\Pages\Comments\GetCommentListRequest;
 use App\Http\Requests\Pages\Comments\StoreCommentRequest;
 use App\Http\Requests\Pages\Comments\UpdateCommentRequest;
 use App\Services\Pages\CommentService;
+use App\Services\Pages\PostService;
 use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
@@ -27,11 +28,15 @@ class CommentController extends Controller
 
     /**
      * @param GetCommentListRequest $request
-     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|mixed[]
+     * @return array
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function getCommentList(GetCommentListRequest $request)
     {
-        return $this->commentService->getCommentList($request->post_id, $request->get('content'));
+        return [
+            "post" => app()->make(PostService::class)->firstWithId($request->post_id),
+            "comments" => $this->commentService->getCommentList($request->post_id, $request->get('content'))
+        ];
     }
 
     /**

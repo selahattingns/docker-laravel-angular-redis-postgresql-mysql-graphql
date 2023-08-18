@@ -3,6 +3,7 @@ namespace App\Repositories\Pages;
 
 use App\Models\Post;
 use App\Interfaces\Pages\PostInterface;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class PostRepository implements PostInterface {
@@ -43,5 +44,21 @@ class PostRepository implements PostInterface {
                 $row->is_my_post = $row->user_id === Auth::id();
                 return $row;
             });
+    }
+
+    /**
+     * @param $userId
+     * @param $title
+     * @param $content
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model
+     */
+    public function storePostToUser($userId, $title, $content)
+    {
+        return $this->model->query()->create([
+            "user_id" => $userId,
+            "title" => $title,
+            "content" => $content,
+            "published_at" => Carbon::now(),
+        ]);
     }
 }

@@ -6,7 +6,7 @@ import { API_URL } from '../../../configs/app.constants';
 @Injectable({
     providedIn: 'root'
 })
-export class PostListService {
+export class PostService {
 
     /**
      *
@@ -27,5 +27,14 @@ export class PostListService {
         params = params.append('content', filterContent);
 
         return this.http.get(`${API_URL}/pages/posts`, {params: params});
+    }
+
+    /**
+     *
+     * @param newTitle
+     * @param newContent
+     */
+    storePost(newTitle: string, newContent:string){
+        return this.http.post(`${API_URL}/pages/posts`, {title: newTitle, content: newContent});
     }
 }

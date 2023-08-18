@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {PostListService} from "./post-list.service";
+import {PostService} from "./post.service";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-post-list',
@@ -15,7 +16,7 @@ export class PostListComponent {
   filterContent = "";
   posts: any = [];
 
-  constructor(private route: ActivatedRoute, private postListService: PostListService) {}
+  constructor(private route: ActivatedRoute, private postService: PostService, private toastr: ToastrService) {}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -28,10 +29,10 @@ export class PostListComponent {
    *
    */
   getPostList(){
-    this.postListService.getPostList(this.isMyPost, this.filterTitle, this.filterContent).subscribe(
+    this.postService.getPostList(this.isMyPost, this.filterTitle, this.filterContent).subscribe(
         (response) => {
-          this.posts = response;
-        }
+               this.posts = response;
+             }
     );
   }
 
@@ -47,7 +48,14 @@ export class PostListComponent {
    *
    */
   storePost(){
-    console.log(this.newTitle, this.newContent);
+    this.postService.storePost(this.newTitle, this.newContent).subscribe(
+        (response) => {
+          this.toastr.success('success', 'post added.');
+          this.getPostList();
+          this.newTitle = "";
+          this.newContent = "";
+        }
+    );
   }
 
   /**

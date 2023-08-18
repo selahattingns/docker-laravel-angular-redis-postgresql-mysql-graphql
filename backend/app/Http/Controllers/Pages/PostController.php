@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Pages;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Pages\Posts\GetPostListRequest;
+use App\Http\Requests\Pages\Posts\StorePostRequest;
 use App\Services\Pages\PostService;
 
 class PostController extends Controller
@@ -29,5 +30,14 @@ class PostController extends Controller
     public function getPostList(GetPostListRequest $request)
     {
         return $this->postService->getPostList(boolval($request->is_my_post === "true"), $request->title, $request->get('content'));
+    }
+
+    /**
+     * @param StorePostRequest $request
+     * @return mixed
+     */
+    public function storePost(StorePostRequest $request)
+    {
+        return $this->postService->storePost($request->title, $request->get('content'));
     }
 }

@@ -2,6 +2,7 @@
 namespace App\Services\Pages;
 
 use App\Interfaces\Pages\PostInterface;
+use Illuminate\Support\Facades\Auth;
 
 class PostService {
     /**
@@ -27,5 +28,15 @@ class PostService {
     public function getPostList($isMyPost = false, $title = null, $content = null)
     {
         return $this->postRepository->getPostList($isMyPost, $title, $content);
+    }
+
+    /**
+     * @param $title
+     * @param $content
+     * @return mixed
+     */
+    public function storePost($title, $content)
+    {
+        return $this->postRepository->storePostToUser(Auth::id(), $title, $content);
     }
 }

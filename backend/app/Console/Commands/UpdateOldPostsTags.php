@@ -13,7 +13,7 @@ class UpdateOldPostsTags extends Command
      *
      * @var string
      */
-    protected $signature = 'update:old-posts-tags';
+    protected $signature = 'update:tags';
 
     /**
      * The console command description.

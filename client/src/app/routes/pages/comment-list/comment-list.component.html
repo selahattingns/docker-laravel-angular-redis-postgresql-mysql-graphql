@@ -5,11 +5,11 @@
         </div>
     </div>
     <div class="card m-5 bg-body-secondary text-center">
-        <div class="card-header">{{ post.title }}</div>
+        <div class="card-header"><b>{{ post.title }}</b></div>
         <div class="card-body">
             <div class="row">
                 <div class="col">
-                    {{ post.content }}
+                    <b>{{post.user.firstname + " " + post.user.lastname}}</b>: {{ post.content }}
                 </div>
             </div>
         </div>

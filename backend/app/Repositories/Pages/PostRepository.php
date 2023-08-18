@@ -104,7 +104,7 @@ class PostRepository implements PostInterface {
      * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|mixed|object|null
      */
     public function firstWithId($id){
-        return $this->model->query()->where('id', $id)->first();
+        return $this->model->query()->where('id', $id)->with('user')->first();
     }
 
     /**

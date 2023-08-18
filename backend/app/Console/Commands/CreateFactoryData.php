@@ -46,10 +46,12 @@ class CreateFactoryData extends Command
 
         User::factory(intval($userCount))->create()->each(function ($user) use ($postCount, $commentCount){
             $user->posts()->saveMany(
-                Post::factory(intval($postCount))->create()->each(function ($post) use ($user, $commentCount) {
+                Post::factory(intval($postCount))->create([
+                    "user_id" => $user->id
+                ])->each(function ($post) use ($user, $commentCount) {
                     $post->comments()->saveMany(
                         Comment::factory($commentCount)->create([
-                            "user_id" => $user->id
+                            "post_id" => $post->id
                         ])
                     );
                 })

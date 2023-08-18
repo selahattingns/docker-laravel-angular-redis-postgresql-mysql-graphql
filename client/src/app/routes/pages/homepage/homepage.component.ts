@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-homepage',
@@ -7,4 +8,17 @@ import { Component } from '@angular/core';
 })
 export class HomepageComponent {
 
+  /**
+   *
+   * @param router
+   */
+  constructor(private router: Router){}
+
+  /**
+   *
+   * @param isMyPost
+   */
+  goToPostPage(isMyPost : boolean | null = null){
+    this.router.navigate(['pages/post-list/'], { queryParams: {filter: isMyPost ? "me" : "all"} })
+  }
 }

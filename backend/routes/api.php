@@ -19,3 +19,11 @@ Route::post('login', [\App\Http\Controllers\AuthController::class, 'login']);
 Route::middleware('check.jwt')->group(function () {
     Route::post('check-token', [\App\Http\Controllers\AuthController::class, 'checkToken']);
 });
+
+
+Route::group(['prefix' => "pages"], function (){
+    Route::group(['prefix' => "posts"], function (){
+        Route::get('/', [\App\Http\Controllers\Pages\PostController::class, 'getPostList']);
+
+    });
+});

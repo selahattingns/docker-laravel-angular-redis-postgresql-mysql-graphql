@@ -1,0 +1,35 @@
+<div class="container">
+
+    <div class="card m-5" *ngFor="let post of posts">
+        <div class="card-header text-center">
+            <div *ngIf="post.is_my_post">
+                <div class="row">
+                    <div class="col-11">
+                        <input type="text" class="form-control" [(ngModel)]="post.title">
+                    </div>
+                    <div class="col-1">
+                        <a class="close btn btn-danger" href="#">X</a>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="!post.is_my_post">
+                {{ post.title }}
+            </div>
+        </div>
+        <div class="card-body text-center">
+            <div *ngIf="post.is_my_post">
+                <div class="row">
+                    <div class="col-11">
+                        <textarea class="form-control" [(ngModel)]="post.content"></textarea>
+                    </div>
+                    <div class="col-1">
+                        <button class="btn btn-success">Save</button>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="!post.is_my_post">
+                {{ post.content }}
+            </div>
+        </div>
+    </div>
+</div>

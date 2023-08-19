@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Services\Pages\PostService;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 
 class UpdateOldPostsTags extends Command
 {
@@ -47,5 +48,7 @@ class UpdateOldPostsTags extends Command
 
             return $post;
         });
+
+        Log::info('Command Completed Successfully');
     }
 }

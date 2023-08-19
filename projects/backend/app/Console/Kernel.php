@@ -15,7 +15,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-         $schedule->command('update:old-posts-tags')->daily();
+         $schedule->command('update:tags')->daily();
     }
 
     /**

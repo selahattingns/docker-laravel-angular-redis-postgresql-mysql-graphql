@@ -80,11 +80,13 @@ of this service, you should run the command "docker exec -it 39979863cb2b bash"
 
 
     docker exec -it 39979863cb2b bash
+    
 
 - (Note: You can also connect by typing the first 3 characters. "docker exec -it 399 bash" will work as well.)
 
     
     docker exec -it 399 bash
+    
 
 ![image Docker-PS](images/docker-ps.PNG)
 ---

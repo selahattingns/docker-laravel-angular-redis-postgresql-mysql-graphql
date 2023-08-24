@@ -27,7 +27,7 @@ the .env file. We will proceed with the explanation using the .env.docker file.
 ---
 Afterwards, let's verify that the API_URL variable in 
 the 'app.constants.ts' file located in the 'projects/client/src/app/configs' directory 
-is set to http://backend.test/api.
+is set to 'http://backend.test/api'.
 
 ---
 
@@ -43,6 +43,8 @@ this file can be found in the directory C:\Windows\System32\drivers\etc.
 Let's run Docker by typing the command "docker-compose up --build -d" 
 in the directory where the docker-compose.yml file is located.
 
+    docker-compose up --build -d
+
 ---
 
 Let's make sure that all services are running as shown in the image below
@@ -54,13 +56,16 @@ You can also check the services from your terminal.
 To do this, simply run the command "docker ps". 
 This will list the services and their status
 
+    docker ps
+
 ---
 
 Afterwards, you should access the PHPMyAdmin panel running on port 8081 through 
 the "myadmin" service. After entering the username and password 
 as "root" for both, you will log in as an administrator. Then, follow these steps:
 
-- *Create a new database with the name mentioned in the .env file as MYSQL_DATABASE, which in this case is "db_test".*
+- *Create a new database with the name mentioned in the .env file
+ as MYSQL_DATABASE, which in this case is "db_test".*
 
 (Note: In the .env.local file, PostgreSQL has been set as the database, please take note)
  
@@ -73,7 +78,13 @@ of the "php7" service among those listed with "docker ps"
 Container ID is "39979863cb2b." To connect to the terminal 
 of this service, you should run the command "docker exec -it 39979863cb2b bash"
 
+
+    docker exec -it 39979863cb2b bash
+
 - (Note: You can also connect by typing the first 3 characters. "docker exec -it 399 bash" will work as well.)
+
+    
+    docker exec -it 399 bash
 
 ![image Docker-PS](images/docker-ps.PNG)
 ---
@@ -82,9 +93,16 @@ After connecting, you can run
 the command "cd backend && php artisan migrate" to execute 
 the migrations for the database.
 
+
+    cd backend && php artisan migrate
+
 - (Note: While you are in the "backend" directory, 
 you can also use the commands "php artisan queue:work" 
 and "php artisan schedule:run" for queue processing and running scheduled tasks.)
+
+
+    php artisan queue:work
+    php artisan schedule:run
 
 
 
@@ -93,29 +111,29 @@ and "php artisan schedule:run" for queue processing and running scheduled tasks.
 
 Sample Pictures;
 -
-GraphQL (localhost:8000/graphql-playground)
+***GraphQL*** (localhost:8000/graphql-playground)
 
 ![image GraphQL](images/graphql.PNG)
 
-Postman
+***Postman***
 
 ![image Postman](images/postman.PNG)
 
 Project Pictures;
 -
 
-Login
+***Login***
 ![image Login](images/login.PNG)
 
-Register
+***Register***
 ![image Register](images/register.PNG)
 
-Dashboard
+***Dashboard***
 ![image Dashboard](images/dashboard.PNG)
 
-Posts
+***Posts***
 ![image Post-List](images/post-list.PNG)
 
-Comments
+***Comments***
 ![image Comment-List](images/comment-list.PNG)
 

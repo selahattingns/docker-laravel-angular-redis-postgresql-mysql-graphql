@@ -74,7 +74,7 @@ as "root" for both, you will log in as an administrator. Then, follow these step
 We need to connect to the terminal of the service with the "Container ID" 
 of the "php7" service among those listed with "docker ps"
 
-- For example, let's assume the 
+For example, let's assume the 
 Container ID is "39979863cb2b." To connect to the terminal 
 of this service, you should run the command "docker exec -it 39979863cb2b bash"
 
@@ -98,7 +98,7 @@ the migrations for the database.
 
     cd backend && php artisan migrate
 
-- (Note: While you are in the "backend" directory, 
+(Note: While you are in the "backend" directory, 
 you can also use the commands "php artisan queue:work" 
 and "php artisan schedule:run" for queue processing and running scheduled tasks.)
 

@@ -101,4 +101,21 @@ Postman
 
 ![image Postman](images/postman.PNG)
 
+Project Pictures;
+-
+
+Login
+![image Login](images/login.PNG)
+
+Register
+![image Register](images/register.PNG)
+
+Dashboard
+![image Dashboard](images/dashboard.PNG)
+
+Posts
+![image Post-List](images/post-list.PNG)
+
+Comments
+![image Comment-List](images/comment-list.PNG)
 
